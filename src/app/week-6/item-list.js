@@ -5,7 +5,7 @@ import Item from './item';
 import items from './items.json'; // Load static items
 
 export default function ItemList() {
-  // State variable to track current sorting preference (name, Category)
+  // State variable (name, Category)
   const [sortBy, setSortBy] = useState("name");
 
   // Create a sorted copy of the items array
