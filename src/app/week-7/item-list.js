@@ -1,33 +1,31 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Item from './item';
-import items from './items.json'; // Load static items
+import { useState } from "react";
+import Item from "./item";
 
-export default function ItemList() {
-  // State variable (name, Category)
+export default function ItemList({ items }) {
   const [sortBy, setSortBy] = useState("name");
 
-  // Create a sorted copy of the items array
+  // Create a sorted copy of the items prop
   const sortedItems = [...items].sort((a, b) => {
     if (sortBy === "name") {
-      return a.name.localeCompare(b.name); // Sort alphabetically by name
+      return a.name.localeCompare(b.name);
     } else {
-      return a.category.localeCompare(b.category); // Sort alphabetically by category
+      return a.category.localeCompare(b.category);
     }
   });
 
   return (
-    <div>
-      {/* Sorting buttons */}
-      <div className="mb-4">
+   <div>
+      <div className="mb-6 flex items-center gap-4">
+        <h3 className="text-lg font-medium text-white">Sort by:</h3>
         <button
-          className={`px-4 py-2 mr-2 rounded ${
+          className={`px-4 py-2 rounded ${
             sortBy === "name" ? "bg-blue-500 text-white" : "bg-gray-400 text-white"
           }`}
           onClick={() => setSortBy("name")}
         >
-          Sort by Name
+          Name
         </button>
         <button
           className={`px-4 py-2 rounded ${
@@ -35,7 +33,7 @@ export default function ItemList() {
           }`}
           onClick={() => setSortBy("category")}
         >
-          Sort by Category
+          Category
         </button>
       </div>
 
@@ -43,7 +41,7 @@ export default function ItemList() {
       <ul className="space-y-4">
         {sortedItems.map((item) => (
           <Item
-            key={item.id} 
+            key={item.id}
             name={item.name}
             quantity={item.quantity}
             category={item.category}

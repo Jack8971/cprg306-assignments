@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function NewItem() {
-  const [name, setName] = useState('');
+export default function NewItem({ onAddItem }) {
+  const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [category, setCategory] = useState('produce');
+  const [category, setCategory] = useState("produce");
 
   const increment = () => {
     if (quantity < 20) setQuantity(quantity + 1);
@@ -17,19 +17,32 @@ export default function NewItem() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const item = { name, quantity, category };
-    console.log(item);
-    alert(`Item: ${name}\nQuantity: ${quantity}\nCategory: ${category}`);
-    setName('');
+
+    const item = {
+      id: Math.random().toString(36).substr(2, 9), 
+      name,
+      quantity,
+      category,
+    };
+
+    onAddItem(item); 
+
+    // Reset form
+    setName("");
     setQuantity(1);
-    setCategory('produce');
+    setCategory("produce");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white text-black p-6 rounded-md shadow-md w-96 mx-auto text-left space-y-6">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white text-black p-6 rounded-md shadow-md text-left space-y-4"
+    >
       {/* Item Name */}
       <div>
-        <label htmlFor="name" className="block font-medium mb-1">Item Name</label>
+        <label htmlFor="name" className="block font-medium mb-1">
+          Item Name
+        </label>
         <input
           id="name"
           type="text"
@@ -44,7 +57,9 @@ export default function NewItem() {
       {/* Quantity */}
       <div>
         <label className="block font-medium mb-1">Quantity (1–20)</label>
-        <p className="mb-2">Current: <span className="font-bold">{quantity}</span></p>
+        <p className="mb-2">
+          Current: <span className="font-bold">{quantity}</span>
+        </p>
         <div className="flex gap-4">
           <button
             type="button"
@@ -52,8 +67,8 @@ export default function NewItem() {
             disabled={quantity === 1}
             className={`px-4 py-2 text-lg font-bold rounded ${
               quantity === 1
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-500 text-white hover:bg-blue-600'
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
           >
             −
@@ -64,8 +79,8 @@ export default function NewItem() {
             disabled={quantity === 20}
             className={`px-4 py-2 text-lg font-bold rounded ${
               quantity === 20
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-500 text-white hover:bg-blue-600'
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
           >
             +
@@ -76,7 +91,9 @@ export default function NewItem() {
 
       {/* Category */}
       <div>
-        <label htmlFor="category" className="block font-medium mb-1">Category</label>
+        <label htmlFor="category" className="block font-medium mb-1">
+          Category
+        </label>
         <select
           id="category"
           value={category}
@@ -84,11 +101,21 @@ export default function NewItem() {
           className="w-full border border-gray-300 rounded px-3 py-2"
         >
           {[
-            'Produce', 'Dairy', 'Bakery', 'Meat', 'Frozen Foods',
-            'Canned Goods', 'Dry Goods', 'Beverages', 'Snacks',
-            'Household', 'Other'
+            "Produce",
+            "Dairy",
+            "Bakery",
+            "Meat",
+            "Frozen Foods",
+            "Canned Goods",
+            "Dry Goods",
+            "Beverages",
+            "Snacks",
+            "Household",
+            "Other",
           ].map((cat) => (
-            <option key={cat} value={cat.toLowerCase()}>{cat}</option>
+            <option key={cat} value={cat.toLowerCase()}>
+              {cat}
+            </option>
           ))}
         </select>
       </div>
@@ -103,5 +130,4 @@ export default function NewItem() {
     </form>
   );
 }
-
 
