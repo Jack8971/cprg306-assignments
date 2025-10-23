@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Item from "./item";
+import { useState } from 'react';
+import Item from './item';
 
-export default function ItemList({ items }) {
-  const [sortBy, setSortBy] = useState("name");
+export default function ItemList({ items, onItemSelect }) {
+  const [sortBy, setSortBy] = useState('name');
 
   // Create a sorted copy of the items prop
   const sortedItems = [...items].sort((a, b) => {
-    if (sortBy === "name") {
+    if (sortBy === 'name') {
       return a.name.localeCompare(b.name);
     } else {
       return a.category.localeCompare(b.category);
@@ -16,22 +16,22 @@ export default function ItemList({ items }) {
   });
 
   return (
-   <div>
+    <div>
       <div className="mb-6 flex items-center gap-4">
         <h3 className="text-lg font-medium text-white">Sort by:</h3>
         <button
           className={`px-4 py-2 rounded ${
-            sortBy === "name" ? "bg-blue-500 text-white" : "bg-gray-400 text-white"
+            sortBy === 'name' ? 'bg-blue-500 text-white' : 'bg-gray-400 text-white'
           }`}
-          onClick={() => setSortBy("name")}
+          onClick={() => setSortBy('name')}
         >
           Name
         </button>
         <button
           className={`px-4 py-2 rounded ${
-            sortBy === "category" ? "bg-blue-500 text-white" : "bg-gray-400 text-white"
+            sortBy === 'category' ? 'bg-blue-500 text-white' : 'bg-gray-400 text-white'
           }`}
-          onClick={() => setSortBy("category")}
+          onClick={() => setSortBy('category')}
         >
           Category
         </button>
@@ -45,6 +45,7 @@ export default function ItemList({ items }) {
             name={item.name}
             quantity={item.quantity}
             category={item.category}
+            onSelect={onItemSelect}
           />
         ))}
       </ul>
