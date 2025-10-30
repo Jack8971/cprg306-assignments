@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main style={{ backgroundColor: 'black', minHeight: '100vh' }}> {/*add some style to the assignment. Dont knwo excactly what styling to it*/}
+    <main style={{ backgroundColor: 'black', minHeight: '100vh' }}> 
       <h1>CPRG 306: Web Development 2 - Assignments</h1>
       <p>
         {/* Assignment links for all weeks */}
@@ -13,8 +13,8 @@ export default function Home() {
         <Link href="/week-6">Go to Week 6 ➜ </Link>
         <Link href="/week-7">Go to Week 7 ➜ </Link>
         <Link href="/week-8">Go to Week 8 ➜ </Link>
-        {/* <Link href="/week-9">Go to Week 9 ➜ </Link>
-         <Link href="/week-10">Go to Week 10 ➜ </Link>  */}
+        <Link href="/week-9">Go to Week 9 ➜ </Link>
+        {/* <Link href="/week-10">Go to Week 10 ➜ </Link>  */}
 
 
       </p>
