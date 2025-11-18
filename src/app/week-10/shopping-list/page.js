@@ -65,21 +65,18 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useUserAuth } from '../_utils/auth-context';
 import NewItem from './new-item';
 import ItemList from './item-list';
 import MealIdeas from './meal-ideas';
-import { getItems, addItem, deleteItem } from "./-services";
-
-
-// Hardcoded user for testing
-const user = { uid: "7x8kKzZu7lSGw5sg22AGrIYXmX92" };
+import { getItems, addItem, deleteItem } from './-services';
 
 export default function Page() {
+  const { user } = useUserAuth();
   const router = useRouter();
   const [items, setItems] = useState([]);
   const [selectedItemName, setSelectedItemName] = useState('');
 
-  // Load items from Firestore
   useEffect(() => {
     async function loadItems() {
       if (user) {
@@ -90,12 +87,12 @@ export default function Page() {
       }
     }
     loadItems();
-  }, [router]);
+  }, [user, router]);
 
   if (!user) return null;
 
-  async function handleAddItem(newItem) {
-    const added = await addItem(user.uid, newItem);
+  async function handleAddItem(item) {
+    const added = await addItem(user.uid, item);
     setItems(prev => [...prev, added]);
   }
 
