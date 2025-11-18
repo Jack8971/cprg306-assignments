@@ -37,7 +37,7 @@ export default function ItemList({ items, onItemSelect, onDeleteItem }) {
         </button>
       </div>
 
-      {/* 🔹 Render each item using Item component */}
+      {/*  Render each item using Item component */}
       <ul className="space-y-4">
         {sortedItems.map((item) => (
           <Item

@@ -22,7 +22,7 @@ export default function Page() {
         const data = await getItems(user.uid);
         setItems(data);
       } else {
-        router.push('/week-9'); // redirect if not logged in
+        router.push('/week-10'); // redirect if not logged in
       }
     }
     loadItems();

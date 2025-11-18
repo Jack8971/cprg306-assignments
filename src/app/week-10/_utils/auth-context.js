@@ -21,18 +21,18 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // 🔹 GitHub login
+  //  GitHub login
   const gitHubSignIn = () => {
     const provider = new GithubAuthProvider();
     return signInWithPopup(auth, provider);
   };
 
-  // 🔹 Firebase logout
+  //  Firebase logout
   const firebaseSignOut = () => {
     return signOut(auth);
   };
 
-  // 🔹 Firestore: get items
+  //  Firestore: get items
   const getItems = async (userId) => {
     const itemsRef = collection(db, "users", userId, "items");
     const snapshot = await getDocs(itemsRef);
@@ -42,20 +42,20 @@ export const AuthContextProvider = ({ children }) => {
     }));
   };
 
-  // 🔹 Firestore: add item
+  //  Firestore: add item
   const addItem = async (userId, item) => {
     const itemsRef = collection(db, "users", userId, "items");
     const docRef = await addDoc(itemsRef, item);
     return { id: docRef.id, ...item };
   };
 
-  // 🔹 Firestore: delete item
+  //  Firestore: delete item
   const deleteItem = async (userId, itemId) => {
     const itemRef = doc(db, "users", userId, "items", itemId);
     await deleteDoc(itemRef);
   };
 
-  // 🔹 Track auth state
+  //  Track auth state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
