@@ -83,7 +83,7 @@ export default function Page() {
         const data = await getItems(user.uid);
         setItems(data);
       } else {
-        router.push('/week-9');
+        router.push('/week-10');
       }
     }
     loadItems();

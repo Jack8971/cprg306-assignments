@@ -30,7 +30,7 @@ export default function Page() {
               Logout
             </button>
             <a
-              href="/week-9/shopping-list"
+              href="/week-10/shopping-list"
               className="block mt-4 text-blue-400 hover:underline"
             >
               Go to Shopping List
